@@ -1,5 +1,3 @@
-const Hospital = require('../models/Hospital');
-
 //@desc     Get all hospitals
 //@route    GET /api/v1.hospitals
 //@accress  Public
@@ -34,11 +32,15 @@ exports.getHospital = async (req, res, next) => {
 //@route    POST /api/v1.hospitals
 //@accress  Private
 exports.createHospital = async (req, res, next) => {
-	const hospital = await Hospital.create(req.body);
-	res.status(201).json({
-		success: true,
-		data: hospital,
-	});
+	try {
+		const hospital = await Hospital.create(req.body);
+		res.status(201).json({
+			success: true,
+			data: hospital,
+		});
+	} catch (err) {
+		res.status(500).json({ success: false });
+	}
 };
 
 //@desc     Update hospital
@@ -51,7 +53,9 @@ exports.updateHospital = async (req, res, next) => {
 			runValidators: true,
 		});
 
-		if (!hospital) return res.status(400).json({ success: false });
+		if (!hospital) {
+			return res.status(400).json({ success: false });
+		}
 
 		res.status(200).json({ success: true, data: hospital });
 	} catch (err) {
@@ -66,13 +70,12 @@ exports.deleteHospital = async (req, res, next) => {
 	try {
 		const hospital = await Hospital.findByIdAndDelete(req.params.id);
 
-		if (!hospital) return res.status(400).json({ success: false });
+		if (!hospital) {
+			return res.status(400).json({ success: false });
+		}
 
-		res.status(400).json({ success: true, data: {} });
+		res.status(200).json({ success: true, data: {} });
 	} catch (err) {
 		res.status(400).json({ success: false });
 	}
-	res
-		.status(200)
-		.json({ success: true, msg: `Delete hospital ${req.params.id}` });
 };
