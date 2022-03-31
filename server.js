@@ -5,6 +5,8 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+const cors = require('cors');
 const connectDB = require('./config/db');
 
 // Routes
@@ -40,8 +42,13 @@ const limiter = rateLimit({
 	windowsMs: 10 * 60 * 1000,
 	max: 5,
 });
-
 app.use(limiter);
+
+//Prevent http param pollutions
+app.use(hpp());
+
+//Enable CORS
+app.use(cors());
 
 app.use('/api/v1/hospitals', hospitals);
 app.use('/api/v1/auth', auth);
