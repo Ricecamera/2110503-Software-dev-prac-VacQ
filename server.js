@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const xss = require('xss-clean');
+const rateLimit = require('express-rate-limit');
 const connectDB = require('./config/db');
 
 // Routes
@@ -29,6 +31,17 @@ app.use(mongoSanitize());
 
 //Set security headers
 app.use(helmet());
+
+//Prevent XSS attacks
+app.use(xss());
+
+//Rate Limiting
+const limiter = rateLimit({
+	windowsMs: 10 * 60 * 1000,
+	max: 5,
+});
+
+app.use(limiter);
 
 app.use('/api/v1/hospitals', hospitals);
 app.use('/api/v1/auth', auth);
