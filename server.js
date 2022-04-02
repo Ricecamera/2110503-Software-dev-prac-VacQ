@@ -66,9 +66,9 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-app.use('/api/v1/hospitals', hospitals);
-app.use('/api/v1/auth', auth);
-app.use('/api/v1/appointments', appointments);
+app.use('/hospitals', hospitals);
+app.use('/auth', auth);
+app.use('/appointments', appointments);
 const PORT = process.env.PORT | 5000;
 
 const server = app.listen(
