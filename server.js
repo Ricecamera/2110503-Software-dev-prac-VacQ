@@ -62,7 +62,7 @@ const swaggerOptions = {
 		},
 		servers: [
 			{
-				url: 'http://localhost:5000',
+				url: 'https://guarded-hamlet-66748.herokuapp.com/',
 			},
 		],
 	},
@@ -74,7 +74,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use('/hospitals', hospitals);
 app.use('/auth', auth);
 app.use('/appointments', appointments);
-const PORT = process.env.PORT | 5000;
+const PORT = process.env.PORT || 5000;
 
 const server = app.listen(
 	PORT,
