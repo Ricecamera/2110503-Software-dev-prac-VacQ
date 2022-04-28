@@ -24,13 +24,16 @@ exports.protect = async (req, res, next) => {
 
 		console.log(decoded);
 
-		req.user = await User.findById(decoded.id);
-		next();
+		const user = await User.findById(decoded.id);
+		if (user) {
+			req.user = user;
+			next();
+		} else {
+			throw new Error('Invalid creditential');
+		}
 	} catch (err) {
 		console.log(err.stack);
-		return res
-			.status(401)
-			.json({ success: false, message: 'Not authorize to access this route' });
+		return res.status(401).json({ success: false, message: err.message });
 	}
 };
 

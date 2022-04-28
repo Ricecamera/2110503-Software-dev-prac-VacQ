@@ -55,8 +55,6 @@ exports.login = async (req, res, next) => {
 				.json({ success: false, msg: 'Invalid credentials' });
 
 		//Create token
-		// const token = user.getSignedJWTToken();
-		// res.status(200).json({ sucess: true, token });
 		sentTokenResponse(user, 200, res);
 	} catch {
 		return res.status(401).json({
