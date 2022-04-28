@@ -2,7 +2,7 @@ const Hospital = require('../models/Hospital');
 // const VacCenter = require('../models/VacCenter');
 
 //@desc     Get all hospitals
-//@route    GET /api/v1.hospitals
+//@route    GET /hospitals
 //@accress  Public
 exports.getHospitals = async (req, res, next) => {
 	let query;
@@ -79,7 +79,7 @@ exports.getHospitals = async (req, res, next) => {
 };
 
 //@desc     Get single hospital
-//@route    GET /api/v1.hospitals/:id
+//@route    GET /hospitals/:id
 //@accress  Public
 exports.getHospital = async (req, res, next) => {
 	try {
@@ -97,7 +97,7 @@ exports.getHospital = async (req, res, next) => {
 };
 
 //@desc     Create new hospital
-//@route    POST /api/v1.hospitals
+//@route    POST /hospitals
 //@accress  Private
 exports.createHospital = async (req, res, next) => {
 	try {
@@ -112,7 +112,7 @@ exports.createHospital = async (req, res, next) => {
 };
 
 //@desc     Update hospital
-//@route    PUT /api/v1.hospitals/:id
+//@route    PUT /hospitals/:id
 //@accress  Private
 exports.updateHospital = async (req, res, next) => {
 	try {
@@ -132,7 +132,7 @@ exports.updateHospital = async (req, res, next) => {
 };
 
 //@desc     Delete hospital
-//@route    DELETE /api/v1.hospitals/:id
+//@route    DELETE /hospitals/:id
 //@accress  Private
 exports.deleteHospital = async (req, res, next) => {
 	try {

@@ -86,7 +86,7 @@ function sentTokenResponse(user, statusCode, res) {
 }
 
 //@desc		Get current Logged in user
-//@rooute	POST /api/v1/auth/me
+//@rooute	POST /auth/me
 //@access	Private
 exports.getMe = async (req, res, next) => {
 	const user = await User.findById(req.user.id);
@@ -97,7 +97,7 @@ exports.getMe = async (req, res, next) => {
 };
 
 //@desc		Log user out / clear cookie
-//@route 	GET /api/v1/auth/logout
+//@route 	GET /auth/logout
 //@access	Private
 exports.logout = async (req, res, next) => {
 	res.cookie('token', 'none', {
