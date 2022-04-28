@@ -17,7 +17,9 @@ const auth = require('./routes/auth');
 const appointments = require('./routes/appointment');
 
 // Load env vars
-dotenv.config({ path: './config/config.env' });
+if (process.env.NODE_ENV !== 'production') {
+	dotenv.config({ path: './config/config.env' });
+}
 
 const app = express();
 
